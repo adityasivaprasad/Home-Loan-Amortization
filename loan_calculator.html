@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Loan Analyzer (INR)</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338ca;
+            --secondary: #10B981;
+            --bg: #F3F4F6;
+            --card-bg: #ffffff;
+            --text-main: #1F2937;
+            --text-light: #6B7280;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        
+        body { background-color: var(--bg); color: var(--text-main); padding: 20px; }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 { font-size: 2.5rem; color: var(--text-main); font-weight: 700; }
+        header p { color: var(--text-light); }
+
+        /* Layout Grid */
+        .dashboard { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+        
+        @media (max-width: 900px) { .dashboard { grid-template-columns: 1fr; } }
+
+        /* Cards */
+        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        
+        /* Input Section */
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; transition: border 0.3s; }
+        .input-group input:focus { outline: none; border-color: var(--primary);  }
+        
+        button.calculate-btn { width: 100%; background-color: var(--primary); color: white; border: none; padding: 15px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; transition: background 0.3s; font-weight: 600; }
+        button.calculate-btn:hover { background-color: var(--primary-dark); }
+
+        /* Summary Section */
+        .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+        .stat-box { background: #eef2ff; padding: 15px; border-radius: 8px; text-align: center; }
+        .stat-box h3 { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-box .value { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-top: 5px; }
+        .stat-box.interest .value { color: #DC2626; }
+        .stat-box.total .value { color: var(--text-main); }
+
+        @media (max-width: 600px) { .summary-grid { grid-template-columns: 1fr; } }
+
+        /* Suggestion Box */
+        .suggestion-box { background: #ECFDF5; border-left: 5px solid var(--secondary); padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .suggestion-box h4 { color: #065F46; margin-bottom: 5px; }
+        .suggestion-box p { color: #047857; font-size: 0.95rem; line-height: 1.5; }
+
+        /* Chart Container */
+        .chart-container { position: relative; height: 350px; width: 100%; margin-bottom: 30px; }
+
+        /* Table */
+        .table-container { max-height: 400px; overflow-y: auto; margin-top: 20px; border: 1px solid #e5e7eb; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        thead { background-color: #f9fafb; position: sticky; top: 0; z-index: 10; }
+        th, td { padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-size: 0.9rem; }
+        th { font-weight: 600; color: var(--text-light); }
+        tr:hover { background-color: #f9fafb; }
+        
+    </style>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LDLSNWZN71"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LDLSNWZN71');
+</script>
+
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Loan Analytics Dashboard</h1>
+            <p>Analyze your EMI, visualize payments, and find smarter ways to clear your debt.</p>
+        </header>
+
+        <div class="dashboard">
+            <!-- Left Column: Inputs -->
+            <div class="card">
+                <div class="input-group">
+                    <label>Loan Amount (₹)</label>
+                    <!-- Default 50 Lakhs -->
+                    <input type="number" id="loanAmount" value="5000000" placeholder="e.g. 5000000">
+                </div>
+                <div class="input-group">
+                    <label>Interest Rate (% per annum)</label>
+                    <input type="number" id="interestRate" value="8.5" step="0.1" placeholder="e.g. 8.5">
+                </div>
+                <div class="input-group">
+                    <label>Tenure (Years)</label>
+                    <input type="number" id="tenureYears" value="20" placeholder="e.g. 20">
+                </div>
+                <button class="calculate-btn" onclick="calculateLoan()">Calculate Loan</button>
+
+                <div style="margin-top: 30px;">
+                    <h3>Smart Insight</h3>
+                    <div id="smartSuggestion" class="suggestion-box">
+                        <p>Click calculate to get investment advice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Visualization & Data -->
+            <div class="card">
+                <div class="summary-grid">
+                    <div class="stat-box">
+                        <h3>Monthly EMI</h3>
+                        <div class="value" id="emiValue">-</div>
+                    </div>
+                    <div class="stat-box interest">
+                        <h3>Total Interest</h3>
+                        <div class="value" id="totalInterest">-</div>
+                    </div>
+                    <div class="stat-box total">
+                        <h3>Total Payment</h3>
+                        <div class="value" id="totalPayment">-</div>
+                    </div>
+                </div>
+
+                <h3>Payment Schedule (Yearly View)</h3>
+                <div class="chart-container">
+                    <canvas id="loanChart"></canvas>
+                </div>
+
+                <h3>Amortization Schedule</h3>
+                <div class="table-container">
+                    <table id="scheduleTable">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Opening Bal</th>
+                                <th>EMI</th>
+                                <th>Principal</th>
+                                <th>Interest</th>
+                                <th>Closing Bal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Rows generated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let loanChart = null;
+
+        // Formats number to Indian Rupee (e.g., ₹50,00,000)
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-IN', { 
+                style: 'currency', 
+                currency: 'INR', 
+                maximumFractionDigits: 0 
+            }).format(num);
+        }
+
+        function calculateLoan() {
+            // 1. Get Inputs
+            const P = parseFloat(document.getElementById('loanAmount').value);
+            const R_annual = parseFloat(document.getElementById('interestRate').value);
+            const years = parseFloat(document.getElementById('tenureYears').value);
+
+            if (!P || !R_annual || !years) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            // 2. Core Calculations
+            const r = R_annual / 12 / 100; // Monthly interest rate
+            const n = years * 12; // Total months
+
+            // EMI Formula: P * r * (1+r)^n / ((1+r)^n - 1)
+            const emi = P * r * (Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            
+            const totalPayment = emi * n;
+            const totalInterest = totalPayment - P;
+
+            // 3. Update Summary UI
+            document.getElementById('emiValue').innerText = formatCurrency(emi);
+            document.getElementById('totalInterest').innerText = formatCurrency(totalInterest);
+            document.getElementById('totalPayment').innerText = formatCurrency(totalPayment);
+
+            // 4. Generate Amortization Schedule & Chart Data
+            let balance = P;
+            let scheduleData = [];
+            let chartLabels = [];
+            let chartPrincipal = [];
+            let chartInterest = [];
+            let chartBalances = []; // For tooltip
+
+            // Arrays for yearly aggregation (for cleaner chart)
+            let yearlyPrincipal = new Array(years).fill(0);
+            let yearlyInterest = new Array(years).fill(0);
+            let yearlyBalance = new Array(years).fill(0);
+
+            const tbody = document.querySelector('#scheduleTable tbody');
+            tbody.innerHTML = '';
+
+            for (let i = 1; i <= n; i++) {
+                const interestComp = balance * r;
+                const principalComp = emi - interestComp;
+                const opening = balance;
+                balance = balance - principalComp;
+                if(balance < 0) balance = 0;
+
+                // Add to Table (only showing every month might slow down DOM, but 360 rows is fine)
+                const row = `
+                    <tr>
+                        <td>${i}</td>
+                        <td>${formatCurrency(opening)}</td>
+                        <td>${formatCurrency(emi)}</td>
+                        <td>${formatCurrency(principalComp)}</td>
+                        <td>${formatCurrency(interestComp)}</td>
+                        <td>${formatCurrency(balance)}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+
+                // Aggregate Data for Chart (Yearly grouping)
+                const currentYearIndex = Math.floor((i - 1) / 12);
+                if (currentYearIndex < years) {
+                    yearlyPrincipal[currentYearIndex] += principalComp;
+                    yearlyInterest[currentYearIndex] += interestComp;
+                    yearlyBalance[currentYearIndex] = balance; // Store end of year balance
+                }
+            }
+
+            // Generate Year Labels
+            for(let y = 1; y <= years; y++) {
+                chartLabels.push(`Year ${y}`);
+            }
+
+            // 5. Render Chart
+            renderChart(chartLabels, yearlyPrincipal, yearlyInterest, yearlyBalance);
+
+            // 6. Generate Smart Suggestions
+            generateSuggestions(P, emi, totalInterest, n, R_annual);
+        }
+
+        function renderChart(labels, principalData, interestData, balanceData) {
+            const ctx = document.getElementById('loanChart').getContext('2d');
+            
+            if (loanChart) {
+                loanChart.destroy();
+            }
+
+            loanChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Principal Paid',
+                            data: principalData,
+                            backgroundColor: '#4F46E5',
+                        },
+                        {
+                            label: 'Interest Paid',
+                            data: interestData,
+                            backgroundColor: '#DC2626',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true },
+                        y: { 
+                            stacked: true,
+                            ticks: {
+                                // Shorten Y axis labels for big INR numbers (e.g., 5L)
+                                callback: function(value) {
+                                    if(value >= 10000000) return '₹' + (value/10000000).toFixed(1) + 'Cr';
+                                    if(value >= 100000) return '₹' + (value/100000).toFixed(0) + 'L';
+                                    return value;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                afterBody: function(context) {
+                                    // Custom tooltip to show outstanding balance
+                                    const yearIndex = context[0].dataIndex;
+                                    const outstanding = balanceData[yearIndex];
+                                    return `\nOutstanding Balance: ${formatCurrency(outstanding)}`;
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += formatCurrency(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateSuggestions(principal, currentEMI, totalInterest, months, rate) {
+            const suggestionBox = document.getElementById('smartSuggestion');
+            
+            // Logic: What if they pay 10% more EMI?
+            const extraEMI = currentEMI * 1.1; 
+            // Simple iteration to find new tenure
+            let simBalance = principal;
+            let simMonths = 0;
+            let r = rate / 12 / 100;
+            
+            while (simBalance > 0 && simMonths < 1000) {
+                let int = simBalance * r;
+                let prin = extraEMI - int;
+                simBalance -= prin;
+                simMonths++;
+            }
+
+            const monthsSaved = months - simMonths;
+            const yearsSaved = (monthsSaved / 12).toFixed(1);
+            const extraCostPerMonth = extraEMI - currentEMI;
+            
+            // Interest saving approx calculation
+            const newTotalPayment = simMonths * extraEMI;
+            const newTotalInterest = newTotalPayment - principal;
+            const interestSaved = totalInterest - newTotalInterest;
+
+            suggestionBox.innerHTML = `
+                <h4>💡 Efficient Way to Close Loan</h4>
+                <p>If you increase your EMI by just <strong>${formatCurrency(extraCostPerMonth)}</strong> (10%), you could:</p>
+                <ul style="margin-left: 20px; margin-top: 5px;">
+                    <li>Save approx <strong>${formatCurrency(interestSaved)}</strong> in interest.</li>
+                    <li>Finish your loan <strong>${yearsSaved} years</strong> earlier.</li>
+                </ul>
+                <p style="margin-top:8px; font-size:0.85rem">Alternatively, investing a lump sum equal to 5% of your loan annually in a Mutual Fund (assuming 12% return) can recover your total interest paid before the loan tenure ends.</p>
+            `;
+        }
+
+        // Initialize with default values
+        window.onload = calculateLoan;
+    </script>
+</body>
+</html>
