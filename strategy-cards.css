@@ -1,0 +1,288 @@
+/* ═══════════════════════════════════════════════════════════
+   WhatsMyEMI — strategy-cards.css
+   Strategy grid, individual cards, SIP card, fund selector
+═══════════════════════════════════════════════════════════ */
+
+/* ─── Grid ─── */
+.strategies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+/* ─── Base Card ─── */
+.strategy-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  cursor: pointer;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  user-select: none;
+}
+
+.strategy-card:hover {
+  border-color: rgba(255,255,255,0.13);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+}
+
+.strategy-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Active state */
+.strategy-card.active {
+  border-color: var(--card-color, var(--accent));
+  box-shadow: 0 0 0 1px var(--card-color, var(--accent)), 0 16px 48px rgba(0,0,0,0.4);
+  transform: translateY(-4px);
+}
+
+/* Card shimmer on hover */
+.strategy-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.strategy-card:hover::after { opacity: 1; }
+
+/* ─── Check indicator ─── */
+.card-check {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  background: var(--card-color, var(--accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.25s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 12px;
+  color: #0a0e1a;
+  font-weight: 900;
+  z-index: 1;
+}
+
+.strategy-card.active .card-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── Card content ─── */
+.card-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.card-number {
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--card-color, var(--accent));
+  font-weight: 600;
+}
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* ─── Card inputs ─── */
+.card-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.card-input-row label {
+  font-size: 0.73rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.card-input-row input {
+  width: 80px;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  border-radius: 8px;
+}
+
+.unit-label {
+  font-size: 0.73rem;
+  color: var(--muted);
+}
+
+/* ─── Card Result Row ─── */
+.card-result {
+  display: none;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.card-result.visible { display: flex; }
+
+.cr-item { flex: 1; min-width: 70px; }
+.cr-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 3px; }
+.cr-value { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; }
+
+/* ─── Fund Selector ─── */
+.fund-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.fund-selector label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.fund-selector select {
+  padding: 9px 12px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* ─── SIP Result Box ─── */
+.sip-result-box {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 4px;
+  border: 1px solid rgba(245,158,11,0.2);
+}
+
+.sip-result-box.visible { display: flex; }
+
+.sip-fund-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sip-fund-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent3);
+  line-height: 1.4;
+}
+
+.sip-fund-link {
+  color: var(--accent3);
+  text-decoration: none;
+  font-size: 0.72rem;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+
+.sip-fund-link:hover { opacity: 1; text-decoration: underline; }
+
+.sip-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.sip-metric {
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.sip-metric-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.sip-metric-value {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sip-verdict {
+  background: rgba(0,212,170,0.07);
+  border: 1px solid rgba(0,212,170,0.18);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.sip-verdict strong { color: var(--accent); }
+.sip-verdict .neg { color: var(--danger); }
+.sip-verdict .pos { color: var(--accent3); }
+
+.sip-disclaimer {
+  font-size: 0.65rem;
+  color: var(--muted);
+  line-height: 1.5;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 10px;
+}
+
+/* ─── SIP Card full-width on wide screens ─── */
+.sip-card {
+  grid-column: span 1;
+}
+
+@media (min-width: 1000px) {
+  .strategies-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .strategies-grid { grid-template-columns: 1fr; }
+  .sip-metrics { grid-template-columns: 1fr 1fr; }
+  .card-input-row input { width: 70px; }
+}

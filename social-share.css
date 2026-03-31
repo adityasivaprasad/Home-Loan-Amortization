@@ -1,0 +1,173 @@
+/* ═══════════════════════════════════════════════════════════
+   WhatsMyEMI — social-share.css
+   Floating social buttons and share CTA banner
+═══════════════════════════════════════════════════════════ */
+
+/* ─── Floating Share Sidebar ─── */
+.social-float {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 200;
+}
+
+.share-bubble {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+  text-decoration: none;
+  position: relative;
+  font-size: 1rem;
+  border: none;
+  color: white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+
+.share-bubble:hover {
+  transform: scale(1.18) translateX(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+}
+
+/* Tooltip on hover */
+.share-bubble::before {
+  content: attr(data-tip);
+  position: absolute;
+  right: 56px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  border: 1px solid var(--border);
+  z-index: 10;
+}
+
+.share-bubble:hover::before { opacity: 1; }
+
+/* Platform colours */
+.sb-wa { background: #25D366; }
+.sb-tg { background: #229ED9; }
+.sb-tw { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.15); }
+.sb-ig { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+/* Pulse on first load to draw attention */
+.sb-wa {
+  animation: sharePulse 2.5s 2.5s ease both;
+}
+
+@keyframes sharePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
+  60%  { box-shadow: 0 0 0 12px rgba(37,211,102,0); }
+  100% { box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+}
+
+/* ─── Share CTA Banner ─── */
+.share-cta {
+  background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(0,212,170,0.08));
+  border: 1px solid rgba(108,99,255,0.22);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  text-align: center;
+  margin-bottom: 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.share-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(108,99,255,0.07), transparent);
+  pointer-events: none;
+}
+
+.share-cta-icon {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.share-cta h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.share-cta p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+  position: relative;
+}
+
+.share-cta-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* Inline share buttons */
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: white;
+  white-space: nowrap;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.share-btn:active { transform: translateY(0); }
+
+.share-btn.sb-wa { background: #25D366; }
+.share-btn.sb-tg { background: #229ED9; }
+.share-btn.sb-tw { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.15); }
+.share-btn.sb-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366); }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .social-float { right: 8px; gap: 8px; }
+  .share-bubble { width: 40px; height: 40px; font-size: 0.9rem; }
+  .share-bubble::before { display: none; } /* hide tooltip on mobile */
+  .share-cta { padding: 26px 18px; }
+}
+
+@media (max-width: 480px) {
+  .share-cta-btns { gap: 8px; }
+  .share-btn { padding: 9px 14px; font-size: 0.75rem; }
+}
