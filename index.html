@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ═══ PRIMARY SEO META ═══ -->
+  <title>WhatsMyEMI — Free EMI Calculator with Smart Loan Optimizer for India</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <meta name="description" content="Calculate your home loan, car loan or personal loan EMI instantly. Use 6 smart strategies — extra EMI, EMI hike, SIP in mutual funds — to save lakhs of rupees in interest. Free, no login required.">
+  <meta name="keywords" content="EMI calculator, loan EMI calculator India, home loan EMI, car loan EMI, personal loan EMI, reduce loan interest, prepayment calculator, SIP calculator, mutual fund SIP, HDFC mutual fund, ICICI mutual fund, Axis mutual fund, loan optimizer, amortization schedule India">
+  <meta name="author" content="WhatsMyEMI">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://whatsmyemi.com/">
+
+  <!-- ═══ OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://whatsmyemi.com/">
+  <meta property="og:title" content="WhatsMyEMI — Save Lakhs on Your Loan Interest">
+  <meta property="og:description" content="India's smartest free EMI calculator. Discover 6 proven strategies to slash your loan interest and close your loan years early — including SIP in top mutual funds.">
+  <meta property="og:image" content="https://whatsmyemi.com/og-preview.png">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="WhatsMyEMI">
+
+  <!-- ═══ TWITTER CARD ═══ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://whatsmyemi.com/">
+  <meta name="twitter:title" content="WhatsMyEMI — Save Lakhs on Your Loan Interest">
+  <meta name="twitter:description" content="India's smartest free EMI calculator with 6 strategies to reduce interest & close loan early. Try SIP strategy to beat your loan interest with mutual funds.">
+  <meta name="twitter:image" content="https://whatsmyemi.com/og-preview.png">
+
+  <!-- ═══ STRUCTURED DATA (JSON-LD) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "WhatsMyEMI",
+    "url": "https://whatsmyemi.com",
+    "description": "Free EMI calculator with 6 smart loan optimization strategies for Indian borrowers. Calculate home loan, car loan, personal loan EMI and discover how to save lakhs in interest.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+    "inLanguage": "en-IN",
+    "audience": { "@type": "Audience", "geographicArea": { "@type": "Country", "name": "India" } }
+  }
+  </script>
+
+  <!-- ═══ FONTS ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- ═══ STYLES ═══ -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/strategy-cards.css">
+  <link rel="stylesheet" href="css/social-share.css">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div>
+          <div class="logo">whats<span>my</span>emi</div>
+          <div class="tagline">SMART LOAN OPTIMIZER</div>
+        </div>
+       <!-- <div class="header-right">
+          <span class="header-badge">100% Free · No Login</span>
+        </div> -->
+		<div style="font-size:0.8rem;color:var(--muted);text-align:right;line-height:1.6;">
+        Smart strategies.<br>Real savings.
+      </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" aria-label="Hero Section">
+    <div class="container">
+      <div class="hero-badge">6 Smart Strategies to Save Lakhs</div>
+      <h1>Pay Off Your Loan <em>Smarter,</em><br>Not Harder</h1>
+      <p>Enter your loan details, pick one or more strategies, and instantly see how much interest you save — or how to turn your interest cost into wealth via SIP.</p>
+    </div>
+  </section>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main class="container" id="main-content">
+
+    <!-- ── Loan Input Card ── -->
+    <section class="calc-card" aria-label="Loan Details">
+      <div class="calc-title">Loan Details</div>
+      <div class="inputs-grid">
+        <div class="input-group">
+          <label for="loanAmt">Loan Amount</label>
+          <div class="input-wrap">
+            <span class="input-prefix">₹</span>
+            <input type="number" id="loanAmt" class="has-prefix" placeholder="50,00,000" value="5000000" aria-label="Loan Amount in Rupees">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="rate">Interest Rate</label>
+          <div class="input-wrap">
+            <input type="number" id="rate" class="has-suffix" placeholder="8.5" value="8.5" step="0.1" aria-label="Annual Interest Rate">
+            <span class="input-suffix">% p.a.</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="tenure">Tenure</label>
+          <div class="input-wrap">
+            <input type="number" id="tenure" class="has-suffix" placeholder="20" value="20" min="1" max="30" aria-label="Loan Tenure in Years">
+            <span class="input-suffix">Yrs</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="startDate">Loan Start Date</label>
+          <div class="input-wrap">
+            <input type="date" id="startDate" aria-label="Loan Start Date">
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="calculate()" aria-label="Calculate EMI">
+          &#9889; Calculate &amp; Plan
+        </button>
+        <button class="btn btn-ghost" onclick="resetAll()" aria-label="Reset Calculator">
+          &#8635; Reset
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Results Summary Pills ── -->
+    <section class="results-summary" id="resultsSummary" aria-live="polite" aria-label="Loan Summary">
+      <div class="result-pill pill-emi">
+        <div class="pill-label">Monthly EMI</div>
+        <div class="pill-value" id="rEMI">—</div>
+        <div class="pill-sub">Standard payment</div>
+      </div>
+      <div class="result-pill pill-interest">
+        <div class="pill-label">Total Interest</div>
+        <div class="pill-value" id="rInterest">—</div>
+        <div class="pill-sub">Extra over principal</div>
+      </div>
+      <div class="result-pill pill-total">
+        <div class="pill-label">Total Payment</div>
+        <div class="pill-value" id="rTotal">—</div>
+        <div class="pill-sub">Principal + Interest</div>
+      </div>
+      <div class="result-pill pill-tenure">
+        <div class="pill-label">Remaining Tenure</div>
+        <div class="pill-value" id="rTenure">—</div>
+        <div class="pill-sub">From today</div>
+      </div>
+    </section>
+
+    <!-- ── Strategy Section ── -->
+    <div id="strategiesWrap" style="display:none">
+
+      <!-- Combined savings banner (shows when >1 strategy active) -->
+      <div class="combined-banner" id="combinedBanner" style="display:none" aria-live="polite">
+        <div class="cb-left">
+          <div class="cb-label">Combined Strategy Impact</div>
+          <div class="cb-metrics">
+            <span>Interest Saved: <strong id="cb-saved">—</strong></span>
+            <span>Time Saved: <strong id="cb-time">—</strong></span>
+            <span>New Tenure: <strong id="cb-tenure">—</strong></span>
+          </div>
+        </div>
+        <div class="cb-tag">Multi-Strategy Active</div>
+      </div>
+
+      <div class="section-header">
+        <div>
+          <div class="section-title">Smart Strategies</div>
+          <div class="section-sub">Select one or more strategies. Impact is calculated for all active strategies combined.</div>
+        </div>
+      </div>
+
+      <div class="strategies-grid" id="strategiesGrid">
+
+        <!-- S1: Extra EMI -->
+        <article class="strategy-card" id="card-s1" style="--card-color:#6c63ff" onclick="toggleStrategy('s1')" role="button" tabindex="0" aria-pressed="false" aria-label="Extra EMI Every Year Strategy">
+          <div class="card-check" aria-hidden="true">&#10003;</div>
+          <div class="card-icon" aria-hidden="true">&#128260;</div>
+          <div class="card-number">Strategy 01</div>
+          <div class="card-title">Extra EMI Every Year <span class="badge badge-hot">Popular</span></div>
+          <div class="card-desc">Pay additional EMIs annually — one extra instalment can cut years off your loan and save lakhs in interest.</div>
+          <div class="card-input-row" onclick="event.stopPropagation()">
+            <label for="s1-count">Extra EMIs/year:</label>
+            <input type="number" id="s1-count" value="1" min="1" max="12" oninput="onStrategyInput('s1')">
+          </div>
+          <div class="card-result" id="res-s1">
+            <div class="cr-item"><div class="cr-label">Interest Saved</div><div class="cr-value" id="s1-saved" style="color:var(--accent)">—</div></div>
+            <div class="cr-item"><div class="cr-label">Time Saved</div><div class="cr-value" id="s1-time" style="color:var(--accent2)">—</div></div>
+            <div class="cr-item"><div class="cr-label">New Tenure</div><div class="cr-value" id="s1-new-tenure" style="color:var(--accent3)">—</div></div>
+          </div>
+        </article>
+
+        <!-- S2: Hike EMI -->
+        <article class="strategy-card" id="card-s2" style="--card-color:#f59e0b" onclick="toggleStrategy('s2')" role="button" tabindex="0" aria-pressed="false" aria-label="Annual EMI Hike Strategy">
+          <div class="card-check" aria-hidden="true">&#10003;</div>
+          <div class="card-icon" aria-hidden="true">&#128200;</div>
+          <div class="card-number">Strategy 02</div>
+          <div class="card-title">Annual EMI Hike</div>
+          <div class="card-desc">Increase your EMI every year matching your salary hike. A small annual step-up creates massive savings over time.</div>
+          <div class="card-input-row" onclick="event.stopPropagation()">
+            <label for="s2-hike">Hike % per year:</label>
+            <input type="number" id="s2-hike" value="5" min="1" max="50" oninput="onStrategyInput('s2')">
+          </div>
+          <div class="card-result" id="res-s2">
+            <div class="cr-item"><div class="cr-label">Interest Saved</div><div class="cr-value" id="s2-saved" style="color:var(--accent)">—</div></div>
+            <div class="cr-item"><div class="cr-label">Time Saved</div><div class="cr-value" id="s2-time" style="color:var(--accent2)">—</div></div>
+            <div class="cr-item"><div class="cr-label">New Tenure</div><div class="cr-value" id="s2-new-tenure" style="color:var(--accent3)">—</div></div>
+          </div>
+        </article>
+
+        <!-- S3: Quarterly Boost -->
+        <article class="strategy-card" id="card-s3" style="--card-color:#00d4aa" onclick="toggleStrategy('s3')" role="button" tabindex="0" aria-pressed="false" aria-label="Quarterly Boost Strategy">
+          <div class="card-check" aria-hidden="true">&#10003;</div>
+          <div class="card-icon" aria-hidden="true">&#128197;</div>
+          <div class="card-number">Strategy 03</div>
+          <div class="card-title">Quarterly Boost</div>
+          <div class="card-desc">Pay an extra 0.5 EMI every quarter. Perfect if you receive quarterly bonuses, dividends, or freelance income.</div>
+          <div class="card-result" id="res-s3">
+            <div class="cr-item"><div class="cr-label">Interest Saved</div><div class="cr-value" id="s3-saved" style="color:var(--accent)">—</div></div>
+            <div class="cr-item"><div class="cr-label">Time Saved</div><div class="cr-value" id="s3-time" style="color:var(--accent2)">—</div></div>
+            <div class="cr-item"><div class="cr-label">New Tenure</div><div class="cr-value" id="s3-new-tenure" style="color:var(--accent3)">—</div></div>
+          </div>
+        </article>
+
+        <!-- S4: 6-Month Boost -->
+        <article class="strategy-card" id="card-s4" style="--card-color:#ec4899" onclick="toggleStrategy('s4')" role="button" tabindex="0" aria-pressed="false" aria-label="Bi-Annual Boost Strategy">
+          <div class="card-check" aria-hidden="true">&#10003;</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 8h12M12 3v18M8 8c0 2.5 2 4 4 4s4-1.5 4-4"/></svg>
+          </div>
+          <div class="card-number">Strategy 04</div>
+          <div class="card-title">Bi-Annual Boost</div>
+          <div class="card-desc">Pay one full extra EMI every 6 months. Ideal for professionals who receive half-yearly bonuses or performance incentives.</div>
+          <div class="card-result" id="res-s4">
+            <div class="cr-item"><div class="cr-label">Interest Saved</div><div class="cr-value" id="s4-saved" style="color:var(--accent)">—</div></div>
+            <div class="cr-item"><div class="cr-label">Time Saved</div><div class="cr-value" id="s4-time" style="color:var(--accent2)">—</div></div>
+            <div class="cr-item"><div class="cr-label">New Tenure</div><div class="cr-value" id="s4-new-tenure" style="color:var(--accent3)">—</div></div>
+          </div>
+        </article>
+
+        <!-- S5: Target Tenure -->
+        <article class="strategy-card" id="card-s5" style="--card-color:#10b981" onclick="toggleStrategy('s5')" role="button" tabindex="0" aria-pressed="false" aria-label="Target Closure Strategy">
+          <div class="card-check" aria-hidden="true">&#10003;</div>
+          <div class="card-icon" aria-hidden="true">&#127919;</div>
+          <div class="card-number">Strategy 05</div>
+          <div class="card-title">Target Closure <span class="badge badge-new">Goal-Based</span></div>
+          <div class="card-desc">Set your target year to close the loan. We'll compute the exact annual lumpsum needed — right to the rupee.</div>
+          <div class="card-input-row" onclick="event.stopPropagation()">
+            <label for="s5-target">Close in (yrs):</label>
+            <input type="number" id="s5-target" value="10" min="1" oninput="onStrategyInput('s5')">
+          </div>
+          <div class="card-result" id="res-s5">
+            <div class="cr-item"><div class="cr-label">Annual Lumpsum</div><div class="cr-value" id="s5-lumpsum" style="color:var(--accent3)">—</div></div>
+            <div class="cr-item"><div class="cr-label">Interest Saved</div><div class="cr-value" id="s5-saved" style="color:var(--accent)">—</div></div>
+            <div class="cr-item"><div class="cr-label">Years Saved</div><div class="cr-value" id="s5-time" style="color:var(--accent2)">—</div></div>
+          </div>
+        </article>
+
+        <!-- S6: SIP Strategy -->
+        <article class="strategy-card sip-card" id="card-s6" style="--card-color:#f59e0b" onclick="toggleStrategy('s6')" role="button" tabindex="0" aria-pressed="false" aria-label="Beat Interest with SIP Strategy">
+          <div class="card-check" aria-hidden="true">&#10003;</div>
+          <div class="card-icon" aria-hidden="true">&#127807;</div>
+          <div class="card-number">Strategy 06 · NEW</div>
+          <div class="card-title">Beat Interest with SIP <span class="badge badge-new">Smart Money</span></div>
+          <div class="card-desc">Instead of pre-paying, invest a small monthly SIP in a top-rated mutual fund. Let your investments cover the loan interest and leave you richer.</div>
+          <div class="card-input-row sip-cagr-row" onclick="event.stopPropagation()">
+            <label for="s6-cagr">Expected CAGR:</label>
+            <input type="number" id="s6-cagr" value="16" min="1" max="40" step="0.5" oninput="onStrategyInput('s6')">
+            <span class="unit-label">% p.a.</span>
+          </div>
+          <!-- Fund Selector -->
+          <div class="fund-selector" onclick="event.stopPropagation()">
+            <label for="s6-fund">Select Mutual Fund:</label>
+            <select id="s6-fund" onchange="onStrategyInput('s6')">
+              <option value="hdfc-multicap">HDFC Multi Cap Fund — Direct Growth</option>
+              <option value="icici-bluechip">ICICI Pru Bluechip Fund — Direct Growth</option>
+              <option value="axis-smallcap">Axis Small Cap Fund — Direct Growth</option>
+              <option value="parag-flexi">Parag Parikh Flexi Cap Fund — Direct Growth</option>
+              <option value="mirae-largecap">Mirae Asset Large Cap Fund — Direct Growth</option>
+            </select>
+          </div>
+          <!-- SIP Results -->
+          <div class="sip-result-box" id="res-s6">
+            <div class="sip-fund-info">
+              <div class="sip-fund-name" id="s6-fund-name">HDFC Multi Cap Fund — Direct Growth</div>
+              <a href="#" id="s6-fund-link" target="_blank" class="sip-fund-link" onclick="event.stopPropagation()">View Fund on AMC Website &#8599;</a>
+            </div>
+            <div class="sip-metrics">
+              <div class="sip-metric">
+                <div class="sip-metric-label">Monthly SIP</div>
+                <div class="sip-metric-value" id="s6-sip-amount" style="color:var(--accent3)">—</div>
+              </div>
+              <div class="sip-metric">
+                <div class="sip-metric-label">SIP Tenure</div>
+                <div class="sip-metric-value" id="s6-sip-tenure" style="color:var(--accent2)">—</div>
+              </div>
+              <div class="sip-metric">
+                <div class="sip-metric-label">Total Invested</div>
+                <div class="sip-metric-value" id="s6-sip-invested" style="color:var(--muted)">—</div>
+              </div>
+              <div class="sip-metric">
+                <div class="sip-metric-label">Total Returns</div>
+                <div class="sip-metric-value" id="s6-sip-returns" style="color:var(--accent)">—</div>
+              </div>
+              <div class="sip-metric">
+                <div class="sip-metric-label">Loan Interest Paid</div>
+                <div class="sip-metric-value" id="s6-interest-paid" style="color:var(--danger)">—</div>
+              </div>
+              <div class="sip-metric">
+                <div class="sip-metric-label">Net Surplus</div>
+                <div class="sip-metric-value" id="s6-surplus" style="color:var(--accent3)">—</div>
+              </div>
+            </div>
+            <div class="sip-verdict" id="s6-verdict"></div>
+            <div class="sip-disclaimer">* Mutual fund returns are subject to market risk. Past CAGR is not a guarantee of future returns. Consult a SEBI-registered advisor before investing.</div>
+          </div>
+        </article>
+
+      </div><!-- /strategies-grid -->
+
+      <!-- ── Amortization Table ── -->
+      <div class="amort-section" id="amortSection">
+        <div class="divider"></div>
+        <div class="section-header">
+          <div>
+            <div class="section-title">Payment Schedule</div>
+            <div class="section-sub">
+              <span id="pastNotice" style="display:none;color:var(--accent3)">&#9888; Past EMIs shown at standard plan. Strategy payments apply from today onwards.</span>
+              <span id="scheduleNote">Full amortization with combined strategy impact</span>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-controls">
+            <div class="table-legend">
+              <span class="legend-dot dot-past"></span> Past EMIs (Standard)
+              <span class="legend-dot dot-strategy" style="margin-left:12px"></span> Strategy Payments
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <label style="font-size:0.78rem;color:var(--muted)">Show rows:</label>
+              <input type="number" id="showRows" value="24" min="6" max="9999" oninput="renderTable()">
+            </div>
+          </div>
+          <div class="scrollable-table" role="region" aria-label="Amortization Table">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align:left">Month</th>
+                  <th>Date</th>
+                  <th>Opening Balance</th>
+                  <th>Total EMI Paid</th>
+                  <th>Principal</th>
+                  <th>Interest</th>
+                  <th>Extra Amount</th>
+                  <th>Closing Balance</th>
+                </tr>
+              </thead>
+              <tbody id="amortBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ── Share CTA ── -->
+      <section class="share-cta" aria-label="Share Section">
+        <!-- <div class="share-cta-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 8h12M12 3v18M8 8c0 2.5 2 4 4 4s4-1.5 4-4"/></svg>
+        </div> -->
+		<div class="share-cta-icon" aria-hidden="true" style="font-size:2.8rem;font-weight:800;color:var(--accent3);font-family:'Syne',sans-serif;line-height:1;">
+  ₹
+</div>
+        <h2>Your friends are losing lakhs on loan interest right now</h2>
+        <p>It takes 30 seconds to share — it could save them years of EMIs and help them build life-changing wealth. Be the friend who changes their financial life.</p>
+        <div class="share-cta-btns">
+          <a href="#" onclick="shareWA();return false;" class="share-btn sb-wa" aria-label="Share on WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp
+          </a>
+          <a href="#" onclick="shareTG();return false;" class="share-btn sb-tg" aria-label="Share on Telegram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            Telegram
+          </a>
+          <a href="#" onclick="shareTW();return false;" class="share-btn sb-tw" aria-label="Share on X/Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X (Twitter)
+          </a>
+          <a href="#" onclick="shareIG();return false;" class="share-btn sb-ig" aria-label="Share via Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </section>
+
+    </div><!-- /strategiesWrap -->
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="container">
+      <p class="footer-disclaimer">&#9888; This calculator is for illustrative purposes only. Mutual fund investments are subject to market risk. Loan interest savings are indicative — actual figures depend on lender terms. Consult a SEBI-registered financial advisor before investing.</p>
+      <p class="footer-copy">Made with care for smart Indian borrowers &middot; <a href="https://whatsmyemi.com" rel="noopener">whatsmyemi.com</a></p>
+    </div>
+  </footer>
+
+  <!-- ═══ SOCIAL SHARE FLOATER ═══ -->
+  <aside class="social-float" aria-label="Social Share Buttons">
+    <a class="share-bubble sb-wa" href="#" onclick="shareWA();return false;" data-tip="WhatsApp" aria-label="Share on WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a class="share-bubble sb-tg" href="#" onclick="shareTG();return false;" data-tip="Telegram" aria-label="Share on Telegram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </a>
+    <a class="share-bubble sb-tw" href="#" onclick="shareTW();return false;" data-tip="X / Twitter" aria-label="Share on X Twitter">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a class="share-bubble sb-ig" href="#" onclick="shareIG();return false;" data-tip="Instagram" aria-label="Share via Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+  </aside>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <!-- Load order matters: calc.js and table.js must come before strategies.js
+       because strategies.js calls buildSchedule() and window.TABLE at runtime -->
+  <script src="js/calc.js"></script>
+  <script src="js/table.js"></script>
+  <script src="js/strategies.js"></script>
+  <script src="js/share.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
